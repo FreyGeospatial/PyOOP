@@ -84,6 +84,7 @@ dog3.__str__() # instead of .description(). There doesn't seem to be anything *i
 # they begin and end with double underscores. 
 
 #################################
+#################################
 # Exercise:
 
 # Create a Car class with two instance attributes:
@@ -112,6 +113,57 @@ car2.__str__()
 
 
 
+#########################################
+#########################################
+# INHERITING FROM OTHER CLASSES #########
+#########################################
+#########################################
+
+# Child classes can override or extend the attributes and methods of parent classes. 
+# In other words, child classes inherit all of the parent’s attributes and methods but
+#  can also specify attributes and methods that are unique to themselves.
+
+class Dog:
+    species = "Canis familiaris"
+
+    def __init__(self, name, age, breed):
+        self.name = name # assigning name it itself
+        self.age = age # assigning age to itself
+        self.breed = breed
+
+    # Instance method
+    def description(self):
+        return f"{self.name} is {self.age} years old"
+
+    # Another instance method
+    def speak(self, sound): # assigns sound to itself
+        return f"{self.name} says {sound}"
+
+miles = Dog("Miles", 4, "Jack Russell Terrier")
+buddy = Dog("Buddy", 9, "Dachshund")
+jack = Dog("Jack", 3, "Bulldog")
+jim = Dog("Jim", 5, "Bulldog")
+
+miles.speak("woof")
+buddy.speak("bark")
+jim.speak("ruff") # redundant - all bulldogs say ruff
+jack.speak("ruff") # redundant - all bulldogs say ruff
+
+# create child classes
+class JackRussellTerrier(Dog):
+    pass
+
+class Dachshund(Dog):
+    pass
+
+class Bulldog(Dog):
+    pass
+
+# Instances of child classes inherit all of the attributes and methods of the parent class:
+jim2 = Bulldog("Jim", "5", "Bulldog")
+print(jim2)
+type(jim2)
+isinstance(jim2, Dog)
 
 
 
