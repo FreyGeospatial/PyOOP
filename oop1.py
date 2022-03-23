@@ -163,7 +163,83 @@ class Bulldog(Dog):
 jim2 = Bulldog("Jim", "5", "Bulldog")
 print(jim2)
 type(jim2)
-isinstance(jim2, Dog)
+isinstance(jim2, Dog) # true
+
+isinstance(miles, Bulldog) # false
+
+
+######################################
+# extend functionality of parent class
+######################################
+
+class Dog:
+    species = "Canis familiaris"
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"{self.name} is {self.age} years old"
+
+    def speak(self, sound):
+        return f"{self.name} says {sound}"
+
+# child class of class Dog
+class JackRussellTerrier(Dog):
+    def speak(self, sound="Arf"): # override .speak() in class definition for each breed. ONLY OVERRIDES FOR THIS CLASS
+        return f"{self.name} says {sound}"
+
+miles = JackRussellTerrier("Miles", 4) # name, age
+miles.speak()
+miles.speak("Grrr") # this can still override the default behaviour of .speak() though
+
+# # # # # # # # # # # # # # # # # # 
+
+
+class Dog:
+    species = "Canis familiaris"
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"{self.name} is {self.age} years old"
+
+    def speak(self, sound):
+        return f"{self.name} barks: {sound}"
+
+class JackRussellTerrier(Dog):
+    pass
+
+class Dachshund(Dog):
+    pass
+
+class Bulldog(Dog):
+    pass
+
+# child class of class Dog
+class JackRussellTerrier(Dog):
+    def speak(self, sound="Arf"): # override .speak() in class definition for each breed. ONLY OVERRIDES FOR THIS CLASS
+        return f"{self.name} says {sound}"
+
+jim = Bulldog("Jim", 5)
+jim.speak("Woof") # this subclass overrides parent
+
+miles = JackRussellTerrier("Miles", 4)
+miles.speak() # jackrussellterrier never overrode parent attributes. "Miles says Arf"
+
+# when we don’t want the JackRussellTerrier class to lose any changes that might be made to the formatting of the output string of Dog.speak().
+class JackRussellTerrier(Dog):
+    def speak(self, sound="Arf"):
+        return super().speak(sound) # use of super keyword
+    
+
+miles = JackRussellTerrier("Miles", 4)
+miles.speak() # "Miles barks: Arf"
+
+
 
 
 
